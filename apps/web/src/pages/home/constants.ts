@@ -2,7 +2,7 @@ import { ColumnDef } from '@tanstack/react-table';
 
 import { UsersListParams, UsersListSortParams } from 'resources/user';
 
-import { User } from 'types';
+import { Vacancy } from 'types';
 
 export const DEFAULT_PAGE = 1;
 export const PER_PAGE = 10;
@@ -17,22 +17,32 @@ export const DEFAULT_PARAMS: UsersListParams = {
   },
 };
 
-export const COLUMNS: ColumnDef<User>[] = [
+export const COLUMNS: ColumnDef<Vacancy>[] = [
   {
-    accessorKey: 'firstName',
-    header: 'First Name',
+    accessorKey: 'vacancy',
+    header: 'Vacancy',
     cell: (info) => info.getValue(),
     enableSorting: true,
   },
   {
-    accessorKey: 'lastName',
-    header: 'Last Name',
+    accessorKey: 'company',
+    header: 'Company',
     cell: (info) => info.getValue(),
     enableSorting: true,
   },
   {
-    accessorKey: 'email',
-    header: 'Email',
+    accessorKey: 'salary',
+    header: 'Salary',
+    cell: (info) => info.getValue(),
+  },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: (info) => info.getValue(),
+  },
+  {
+    accessorKey: 'notes',
+    header: 'Notes',
     cell: (info) => info.getValue(),
   },
 ];

@@ -1,11 +1,11 @@
 import React, { FC, useLayoutEffect, useState } from 'react';
-import { ActionIcon, ComboboxItem, Group, Select, TextInput } from '@mantine/core';
+import { ActionIcon, Button, ComboboxItem, Group, Select, TextInput } from '@mantine/core';
 import { DatePickerInput, DatesRangeValue } from '@mantine/dates';
 import { useDebouncedValue, useInputState, useSetState } from '@mantine/hooks';
-import { IconSearch, IconSelector, IconX } from '@tabler/icons-react';
+import { IconCirclePlusFilled, IconSearch, IconSelector, IconX } from '@tabler/icons-react';
 import { set } from 'lodash';
 
-import { UsersListParams } from 'resources/user';
+import { VacanciesListParams } from 'resources/vacancy';
 
 const selectOptions: ComboboxItem[] = [
   {
@@ -19,10 +19,11 @@ const selectOptions: ComboboxItem[] = [
 ];
 
 interface FiltersProps {
-  setParams: ReturnType<typeof useSetState<UsersListParams>>[1];
+  setParams: ReturnType<typeof useSetState<VacanciesListParams>>[1];
+  openCreateModal: () => void;
 }
 
-const Filters: FC<FiltersProps> = ({ setParams }) => {
+const Filters: FC<FiltersProps> = ({ setParams, openCreateModal }) => {
   const [search, setSearch] = useInputState('');
   const [sortBy, setSortBy] = useState<string | null>(selectOptions[0].value);
   const [filterDate, setFilterDate] = useState<DatesRangeValue>();
@@ -63,7 +64,7 @@ const Filters: FC<FiltersProps> = ({ setParams }) => {
           size="md"
           value={search}
           onChange={setSearch}
-          placeholder="Search by name or email"
+          placeholder="Search by vacancy, company or status"
           leftSection={<IconSearch size={16} />}
           rightSection={
             search && (
@@ -94,6 +95,9 @@ const Filters: FC<FiltersProps> = ({ setParams }) => {
 
         <DatePickerInput type="range" size="md" placeholder="Pick date" value={filterDate} onChange={handleFilter} />
       </Group>
+      <Button leftSection={<IconCirclePlusFilled size={24} />} onClick={openCreateModal}>
+        Add
+      </Button>
     </Group>
   );
 };

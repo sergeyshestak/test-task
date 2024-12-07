@@ -37,6 +37,8 @@ interface TableProps<T> {
   tableContainerProps?: TableContainerProps;
   EmptyState?: ComponentType;
   LoadingState?: ComponentType;
+  onDelete?: (vacancy: T) => void;
+  onEdit?: (vacancy: T) => void;
 }
 
 const Table = <T extends RowData>({
@@ -50,6 +52,8 @@ const Table = <T extends RowData>({
   onSortingChange,
   onPageChange,
   onRowClick,
+  onDelete,
+  onEdit,
   tableContainerProps,
   EmptyState = TableEmptyState,
   LoadingState = TableLoadingState,
@@ -90,8 +94,16 @@ const Table = <T extends RowData>({
   }, [sorting]);
 
   useEffect(() => {
-    if (onPageChange) onPageChange(pagination.pageIndex + 1);
+    if (onPageChange) {
+      onPageChange(pagination.pageIndex + 1);
+    }
   }, [pagination]);
+
+  useEffect(() => {
+    if (!!pageCount && pagination.pageIndex + 1 > pageCount) {
+      setPagination({ ...pagination, pageIndex: pagination.pageIndex - 1 });
+    }
+  }, [data, pagination, pageCount]);
 
   return (
     <TableContext.Provider value={useMemo(() => table as TanstackTable<T | unknown>, [table])}>
@@ -103,7 +115,7 @@ const Table = <T extends RowData>({
             <Paper radius="md" withBorder>
               <TableContainer horizontalSpacing="xl" verticalSpacing="lg" {...tableContainerProps}>
                 <Thead />
-                <Tbody<T> onRowClick={onRowClick} />
+                <Tbody<T> onRowClick={onRowClick} onDelete={onDelete} onEdit={onEdit} />
               </TableContainer>
             </Paper>
 
