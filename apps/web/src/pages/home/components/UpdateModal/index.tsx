@@ -39,7 +39,7 @@ const UpdateModal: FC<UpdateModalProps> = ({ opened, onClose, onSubmit, editedVa
               label="Enter vacancy"
               placeholder="Vacancy"
               maxLength={30}
-              required={false}
+              required
               error={errors.vacancy?.message}
               defaultValue={editedVacancy?.vacancy ?? ''}
             />
@@ -49,7 +49,7 @@ const UpdateModal: FC<UpdateModalProps> = ({ opened, onClose, onSubmit, editedVa
               label="Enter company"
               placeholder="Company"
               maxLength={30}
-              required={false}
+              required
               error={errors.company?.message}
               defaultValue={editedVacancy?.company ?? ''}
             />
@@ -59,7 +59,7 @@ const UpdateModal: FC<UpdateModalProps> = ({ opened, onClose, onSubmit, editedVa
               label="Enter salary"
               placeholder="Salary"
               maxLength={15}
-              required={false}
+              required
               error={errors.salary?.message}
               defaultValue={editedVacancy?.salary ?? ''}
             />
@@ -69,7 +69,7 @@ const UpdateModal: FC<UpdateModalProps> = ({ opened, onClose, onSubmit, editedVa
               label="Enter status"
               placeholder="Status"
               maxLength={15}
-              required={false}
+              required
               error={errors.status?.message}
               defaultValue={editedVacancy?.status ?? ''}
             />
